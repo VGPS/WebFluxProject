@@ -2,6 +2,9 @@ package wgblackmon.mongodbreactivestockquoteservice.repositories;
 
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
+import org.springframework.data.mongodb.repository.Tailable;
+
+import reactor.core.publisher.Flux;
 import wgblackmon.mongodbreactivestockquoteservice.domain.Quote;
 
 /**
@@ -11,4 +14,7 @@ import wgblackmon.mongodbreactivestockquoteservice.domain.Quote;
  */
 
 public interface QuoteRepository extends ReactiveMongoRepository<Quote, String> {
+	
+	 @Tailable
+	 Flux<Quote> findWithTailableCursorBy(); //must be capped collection
 }
