@@ -3,53 +3,44 @@ package wgblackmon.webfluxstockquoteservice.model;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.time.Instant;
+import java.util.function.IntPredicate;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class Quote {
-	
-	private static final MathContext MATH_CONTEXT = new MathContext(2);
-	
-	private String ticker;
-	private BigDecimal price;
-	private Instant instant;
-	
-	public Quote(String ticker, BigDecimal price) {
-		this.ticker = ticker;
-		this.price = price;
-	}
-	
-	public Quote(String ticker, Double price) {
-		this.ticker = ticker;
-		this.price = new BigDecimal(price, MATH_CONTEXT);
-	}
 
-	public String getTicker() {
-		return ticker;
-	}
+    private static final MathContext MATH_CONTEXT = new MathContext(2);
 
-	public void setTicker(String ticker) {
-		this.ticker = ticker;
+    private String ticker;
+    private BigDecimal price;
+    private Instant instant;
+
+    public Quote() {}
+    
+    public Quote(String ticker, BigDecimal price) {
+        this.ticker = ticker;
+        this.price = price;
+    }
+
+    public Quote(String ticker, Double price) {
+        this.ticker = ticker;
+        this.price = new BigDecimal(price, MATH_CONTEXT);
+    }
+
+	public void setInstant(Instant now) {
+		this.instant = now;
 	}
 
 	public BigDecimal getPrice() {
-		return price;
+		return this.price;
 	}
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
+	public String getTicker() {
+		return this.ticker;
 	}
 
-	public Instant getInstant() {
-		return instant;
-	}
-
-	public void setInstant(Instant instant) {
-		this.instant = instant;
-	}
 	
-	@Override
-	public String toString() {
-		return "Quote [ticker=" + ticker + ", price=" + price + ", instant=" + instant + "]";
-	}
-	
-
 } // end class
