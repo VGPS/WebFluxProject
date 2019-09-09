@@ -1,8 +1,8 @@
 package wgblackmon.webfluxstockquoteservice;
 
 
-import guru.springframework.webfluxstockquoteservice.model.Quote;
-import guru.springframework.webfluxstockquoteservice.service.QuoteGeneratorServiceImpl;
+import wgblackmon.webfluxstockquoteservice.model.Quote;
+import wgblackmon.webfluxstockquoteservice.service.QuoteGeneratorServiceImpl;
 
 import org.junit.Before;
 import org.junit.Test;
