@@ -1,7 +1,7 @@
 package wgblackmon.webfluxstockquoteservice;
 
 
-import guru.springframework.webfluxstockquoteservice.model.Quote;
+import wgblackmon.webfluxstockquoteservice.model.Quote;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
