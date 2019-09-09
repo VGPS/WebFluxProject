@@ -24,10 +24,13 @@ public class QuoteMonitorService implements ApplicationListener<ContextRefreshed
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+    	
+    	// get handle to quote stream
         stockQuoteClient.getQuoteStream()
-                .log("quote-monitor-service")
-                .subscribe(quote -> {
-                    Mono<Quote> savedQuote = quoteRepository.save(quote);
+                .log("quote-monitor-service")		// chatter output
+                .subscribe(quote -> {				// lambda call
+                	// fails here when MongoDB isn't running
+                    Mono<Quote> savedQuote = quoteRepository.save(quote);	// write record
 
                     System.out.println("I saved a quote! Id: " +savedQuote.block().getId());
                 });

@@ -12,9 +12,7 @@ import reactor.core.publisher.Flux;
 /**
  *@author wgb 9/8/2019
  */
-@Slf4j
-@Setter
-@Component
+
 /**
   	get guru values from applicationl.properties file
  	guru.host=localhost
@@ -22,27 +20,21 @@ import reactor.core.publisher.Flux;
 	guru.path=/quotes
  *
  */
+@Slf4j
+@Setter
+@Component
 @ConfigurationProperties("guru")
 public class StockQuoteClient {
 
-    private String host;
-    private String port;
-    private String path;
-    
-    
-    public StockQuoteClient() {}
-
-    public StockQuoteClient(String host, String port, String path) {
-		super();
-		this.host = host;
-		this.port = port;
-		this.path = path;
-	}
-	
-
+	// these props. are NOT being pulled from application.properties file 
+    private String host = "localhost";
+    private String port = "8080";		// port collision with netty
+    private String path = "/quotes";	// not being picked up from guru settings 
+   
+ 
 	public Flux<Quote> getQuoteStream(){
 
-        String url = "http://" + host + port;
+        String url = "http://" + host + ":" + port;
 
         System.out.println("getQuoteStream() - Url Set is: " + url);
 
@@ -50,35 +42,12 @@ public class StockQuoteClient {
                 .baseUrl(url)
                 .build()
                 .get()
-                .uri(path)
+                .uri(path)		
                 .accept(MediaType.APPLICATION_STREAM_JSON)
                 .retrieve()
                 .bodyToFlux(Quote.class);
     }
 
-	public String getHost() {
-		return host;
-	}
-
-	public void setHost(String host) {
-		this.host = host;
-	}
-
-	public String getPort() {
-		return port;
-	}
-
-	public void setPort(String port) {
-		this.port = port;
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
-    
+	
 }	// end class    
     
